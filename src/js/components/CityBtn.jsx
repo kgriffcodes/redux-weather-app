@@ -8,7 +8,7 @@ export default class CityBtn extends React.Component {
   render() {
     return (
       <div className='blue-bg'>
-        <button className='btn blue-btn'>{ this.props.cityName }</button>
+        <button onClick={this.props.onClick} className='btn blue-btn'>{ this.props.cityName }</button>
       </div>
     );
   }
