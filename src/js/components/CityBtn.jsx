@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 export default class CityBtn extends React.Component {
   constructor(props) {
@@ -8,8 +9,18 @@ export default class CityBtn extends React.Component {
   render() {
     return (
       <div className='blue-bg'>
-        <button onClick={this.props.onClick} className='btn blue-btn'>{ this.props.cityName }</button>
+        <button
+          onClick={ this.props.onClick }
+          className='btn blue-btn'
+        >
+          { this.props.cityName }
+        </button>
       </div>
     );
   }
 }
+
+CityBtn.propTypes = {
+  onClick: propTypes.func,
+  cityName: propTypes.string
+};

@@ -9,7 +9,7 @@ export default class WeatherDeet extends React.Component {
     return (
       <div className='weather-deet-container text-center'>
         <p>{ this.props.title }</p>
-        <p className='green-text'>Result</p>
+        <p className='green-text'>{ this.props.deets }</p>
       </div>
     );
   }
