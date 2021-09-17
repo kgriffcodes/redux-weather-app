@@ -29,7 +29,7 @@ class WeatherInfo extends React.Component {
 
 WeatherInfo.propTypes = {
   cityChoice: propTypes.string,
-  weather: propTypes.objectOf(propTypes.object)
+  weather: propTypes.objectOf(propTypes.number)
 };
 
 const mapStoreToProps = store => ({

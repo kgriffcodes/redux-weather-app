@@ -49,7 +49,6 @@ class InputArea extends React.Component {
           <input
             onChange={ this.onChange }
             name='cityChoice'
-            value={ this.props.cityChoice }
             className='col-11'
           />
           <button
