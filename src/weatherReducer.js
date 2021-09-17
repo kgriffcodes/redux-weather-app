@@ -1,11 +1,15 @@
-const initialState = {};
+const error = 'Weather Data Could Not Be Found';
+
+const initialState = {
+  weather: {}
+};
 
 export default function weatherReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_WEATHER_FULFILLED':
-
-    case 'GET_WEATHER_REJECTED':
-
+    case 'FETCH_WEATHER_FULFILLED':
+      return action.payload;
+    case 'FETCH_WEATHER_REJECTED':
+      return error;
     default:
       return state;
   }

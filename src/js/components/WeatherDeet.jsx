@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 export default class WeatherDeet extends React.Component {
   constructor(props) {
@@ -14,3 +15,8 @@ export default class WeatherDeet extends React.Component {
     );
   }
 }
+
+WeatherDeet.propTypes = {
+  title: propTypes.string,
+  deets: propTypes.number
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import CityBtn from './CityBtn';
-import { changeCity } from '../actions/actions';
+import { changeCity, fetchWeather } from '../actions/actions';
 
 class InputArea extends React.Component {
   constructor(props) {
@@ -12,12 +12,11 @@ class InputArea extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onCityClick = this.onCityClick.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    // console log that doesn't work:
     console.log('props.cityChoice:', this.props.cityChoice);
   }
 
@@ -25,13 +24,15 @@ class InputArea extends React.Component {
     this.setState({
       cityChoice: e.target.cityName
     });
-    this.props.changeCity(this.props.cityChoice);
+    const { dispatch } = this.props;
+    dispatch(changeCity(this.props.cityChoice));
     // console log that doesn't work:
     console.log(e.target.cityName);
   }
 
   onSubmitClick() {
-    this.props.getWeather(this.props.cityChoice);
+    const { dispatch } = this.props;
+    dispatch(fetchWeather(this.props.cityChoice));
   }
 
   render() {
@@ -64,13 +65,12 @@ class InputArea extends React.Component {
 }
 
 InputArea.propTypes = {
-  changeCity: propTypes.func,
-  getWeather: propTypes.func,
-  cityChoice: propTypes.string
+  cityChoice: propTypes.string,
+  dispatch: propTypes.func
 };
 
-const mapStateToProps = store => ({
+const mapStoreToProps = store => ({
   cityChoice: store.cityChoice,
 });
 
-export default connect(mapStateToProps, { changeCity })(InputArea);
+export default connect(mapStoreToProps, { changeCity })(InputArea);

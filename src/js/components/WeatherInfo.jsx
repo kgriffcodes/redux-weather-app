@@ -15,12 +15,12 @@ class WeatherInfo extends React.Component {
           <p className='latlong'>Lat/Long: 35.69, 139.69</p>
         </div>
         <div className='weather-deets d-flex align-content-stretch flex-wrap'>
-          <WeatherDeet title='Temperature(F)' deets={ this.props.temperature } />
-          <WeatherDeet title='Pressure' deets={ this.props.pressure } />
-          <WeatherDeet title='Humidity' deets={ this.props.humidity } />
-          <WeatherDeet title='Lowest Temp(F)' deets={ this.props.lowest_temp } />
-          <WeatherDeet title='Highest Temp(F)' deets={ this.props.highest_temp } />
-          <WeatherDeet title='Wind Speed' deets={ this.props.wind_speed } />
+          <WeatherDeet title='Temperature(F)' deets={ this.props.weather.temperature } />
+          <WeatherDeet title='Pressure' deets={ this.props.weather.pressure } />
+          <WeatherDeet title='Humidity' deets={ this.props.weather.humidity } />
+          <WeatherDeet title='Lowest Temp(F)' deets={ this.props.weather.lowest_temp } />
+          <WeatherDeet title='Highest Temp(F)' deets={ this.props.weather.highest_temp } />
+          <WeatherDeet title='Wind Speed' deets={ this.props.weather.wind_speed } />
         </div>
       </div>
     );
@@ -29,22 +29,11 @@ class WeatherInfo extends React.Component {
 
 WeatherInfo.propTypes = {
   cityChoice: propTypes.string,
-  temperature: propTypes.number,
-  pressure: propTypes.number,
-  humidity: propTypes.number,
-  lowest_temp: propTypes.number,
-  highest_temp: propTypes.number,
-  wind_speed: propTypes.number
+  weather: propTypes.objectOf(propTypes.object)
 };
 
-const mapStateToProps = store => ({
-  cityChoice: store.cityChoice,
-  temperature: store.temperature,
-  pressure: store.pressure,
-  humidity: store.humidity,
-  lowest_temp: store.lowest_temp,
-  highest_temp: store.highest_temp,
-  wind_speed: store.wind_speed
+const mapStoreToProps = store => ({
+  weather: store.weather
 });
 
-export default connect(mapStateToProps)(WeatherInfo);
+export default connect(mapStoreToProps)(WeatherInfo);
