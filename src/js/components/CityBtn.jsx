@@ -11,6 +11,7 @@ export default class CityBtn extends React.Component {
       <div className='blue-bg'>
         <button
           onClick={ this.props.onClick }
+          value={ this.props.value }
           className='btn blue-btn'
         >
           { this.props.cityName }
@@ -22,5 +23,6 @@ export default class CityBtn extends React.Component {
 
 CityBtn.propTypes = {
   onClick: propTypes.func,
-  cityName: propTypes.string
+  cityName: propTypes.string,
+  value: propTypes.string
 };

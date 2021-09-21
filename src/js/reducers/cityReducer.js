@@ -1,16 +1,13 @@
 import { CHANGE_CITY } from '../actions/types';
 
 const initialState = {
-  cityChoice: 'Tokyo'
+  cityFullName: 'Tokyo'
 };
 
-export default function (state = initialState, action) {
+export default function cityReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_CITY:
-      return {
-        ...state,
-        cityChoice: action.payload,
-      };
+      return action.payload;
     default:
       return state;
   }

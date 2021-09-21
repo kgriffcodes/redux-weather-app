@@ -3,7 +3,7 @@ import cityReducer from './cityReducer';
 import weatherReducer from './weatherReducer';
 
 const rootReducer = combineReducers({
-  cityChoice: cityReducer,
+  cityFullName: cityReducer,
   weather: weatherReducer
 });
 

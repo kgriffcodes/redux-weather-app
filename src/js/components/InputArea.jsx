@@ -8,53 +8,68 @@ class InputArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityChoice: ''
+      cityFullName: '',
     };
     this.onChange = this.onChange.bind(this);
-    this.onCityClick = this.onCityClick.bind(this);
+    this.handleCityClick = this.handleCityClick.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    console.log('props.cityChoice:', this.props.cityChoice);
-  }
-
-  onCityClick(e) {
     this.setState({
-      cityChoice: e.target.cityName
+      cityFullName: e.target.value,
     });
-    const { dispatch } = this.props;
-    dispatch(changeCity(this.props.cityChoice));
-    // console log that doesn't work:
-    console.log(e.target.cityName);
   }
 
   onSubmitClick() {
-    const { dispatch } = this.props;
-    dispatch(fetchWeather(this.props.cityChoice));
+    // convert full city name to  shortcode before passing to api call
+    const cityCopy = this.state.cityFullName;
+    const cityShortCode = cityCopy.replace(' ', '+').replace(/\./g, '');
+
+    // make api call
+    this.props.onSubmitClick(cityCopy, cityShortCode);
+  }
+
+  handleCityClick(e) {
+    this.setState({
+      cityFullName: e.target.innerText,
+    });
+    this.props.handleCityClick(this.state.cityFullName);
   }
 
   render() {
     return (
       <div className=''>
         <div className='d-flex flex-row'>
-          <CityBtn onClick={ this.onCityClick } cityName='San Diego' />
-          <CityBtn onClick={ this.onCityClick } cityName='New York' />
-          <CityBtn onClick={ this.onCityClick } cityName='Washington D.C.' />
-          <CityBtn onClick={ this.onCityClick } cityName='London' />
-          <CityBtn onClick={ this.onCityClick } cityName='Tokyo' />
+          <CityBtn
+            onClick={ e => this.handleCityClick(e) }
+            cityName='San Diego'
+          />
+          <CityBtn
+            onClick={ e => this.handleCityClick(e) }
+            cityName='New York'
+          />
+          <CityBtn
+            onClick={ e => this.handleCityClick(e) }
+            cityName='Washington D.C.'
+          />
+          <CityBtn
+            onClick={ e => this.handleCityClick(e) }
+            cityName='London'
+          />
+          <CityBtn
+            onClick={ e => this.handleCityClick(e) }
+            cityName='Tokyo'
+          />
         </div>
         <div>
           <input
             onChange={ this.onChange }
             name='cityChoice'
             className='col-11'
+            value={ this.state.cityFullName }
           />
-          <button
-            onClick={ this.onSubmitClick }
-            className='col-1'
-          >
+          <button onClick={ this.onSubmitClick } className='col-1'>
             Go!
           </button>
         </div>
@@ -64,12 +79,26 @@ class InputArea extends React.Component {
 }
 
 InputArea.propTypes = {
-  cityChoice: propTypes.string,
-  dispatch: propTypes.func
+  cityFullName: propTypes.string,
+  cityCode: propTypes.string,
+  dispatch: propTypes.func,
+  onSubmitClick: propTypes.func,
+  changeCity: propTypes.func,
+  handleCityClick: propTypes.func,
 };
 
 const mapStoreToProps = store => ({
-  cityChoice: store.cityChoice,
+  cityFullName: store.cityFullName,
 });
 
-export default connect(mapStoreToProps, { changeCity })(InputArea);
+const mapDispatchToProps = dispatch => ({
+  onSubmitClick: (cityCopy, cityShortCode) => {
+    dispatch(changeCity(cityCopy));
+    dispatch(fetchWeather(cityShortCode));
+  },
+  handleCityClick: (cityName) => {
+    dispatch(changeCity(cityName));
+  }
+});
+
+export default connect(mapStoreToProps, mapDispatchToProps)(InputArea);
