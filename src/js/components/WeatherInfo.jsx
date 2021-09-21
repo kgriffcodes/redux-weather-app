@@ -15,7 +15,7 @@ class WeatherInfo extends React.Component {
           <h3 className='subheader'>City Information</h3>
         </div>
         <div className='pt-5 pb-4 weather-city text-center'>
-          <h4 className=''>Tokyo</h4>
+          <h4 className=''>{ this.props.cityFullName.cityFullName }</h4>
           <p className='latlong'>Lat/Long: 35.69, 139.69</p>
         </div>
         <div className='weather-deets d-flex align-content-stretch flex-wrap'>
