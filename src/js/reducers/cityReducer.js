@@ -1,7 +1,7 @@
 import { CHANGE_CITY } from '../actions/types';
 
 const initialState = {
-  cityFullName: 'Tokyo'
+  city: 'Tokyo'
 };
 
 export default function cityReducer(state = initialState, action) {

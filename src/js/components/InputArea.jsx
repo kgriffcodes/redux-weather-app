@@ -79,7 +79,7 @@ class InputArea extends React.Component {
 }
 
 InputArea.propTypes = {
-  cityFullName: propTypes.string,
+  city: propTypes.objectOf(propTypes.string),
   cityCode: propTypes.string,
   dispatch: propTypes.func,
   onSubmitClick: propTypes.func,
@@ -88,7 +88,7 @@ InputArea.propTypes = {
 };
 
 const mapStoreToProps = store => ({
-  cityFullName: store.cityFullName,
+  city: store.city,
 });
 
 const mapDispatchToProps = dispatch => ({

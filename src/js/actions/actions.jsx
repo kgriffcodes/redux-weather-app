@@ -11,5 +11,14 @@ export const fetchWeather = cityShortCode => ({
 
 export const changeCity = cityFullName => ({
   type: 'CHANGE_CITY',
-  payload: cityFullName
+  payload: {
+    city: cityFullName
+  }
+});
+
+export const updateHistory = (cityFullName, dateStamp, timeStamp) => ({
+  type: 'UPDATE_HISTORY',
+  payload: {
+    history: [{ cityFullName, dateStamp, timeStamp }]
+  }
 });
