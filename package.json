@@ -9,6 +9,9 @@
     "lint": "eslint .",
     "test": "npm run build && mocha test/.setup.js test/*.spec.js --exit"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "directories": {
     "test": "test"
   },
