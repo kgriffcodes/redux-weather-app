@@ -25,7 +25,6 @@ const initialState = {
 export default function weatherReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WEATHER_FULFILLED:
-      console.log(action.payload);
       return action.payload;
     case FETCH_WEATHER_REJECTED:
       return error;

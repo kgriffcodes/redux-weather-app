@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import CityBtn from './CityBtn';
-import { changeCity, fetchWeather } from '../actions/actions';
+import { changeCity, fetchWeather, updateHistory } from '../actions/actions';
 
 class InputArea extends React.Component {
   constructor(props) {
@@ -95,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
   onSubmitClick: (cityCopy, cityShortCode) => {
     dispatch(changeCity(cityCopy));
     dispatch(fetchWeather(cityShortCode));
+    dispatch(updateHistory(cityCopy));
   },
   handleCityClick: (cityName) => {
     dispatch(changeCity(cityName));

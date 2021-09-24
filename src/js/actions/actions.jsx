@@ -1,3 +1,4 @@
+import moment from 'moment';
 import axios from 'axios';
 
 export const fetchWeather = cityShortCode => ({
@@ -16,9 +17,18 @@ export const changeCity = cityFullName => ({
   }
 });
 
-export const updateHistory = (cityFullName, dateStamp, timeStamp) => ({
+const getDateTime = (cityFullName) => {
+  const nowMoment = moment();
+  const currentDate = nowMoment.format('L');
+  const currentTime = nowMoment.format('LT');
+  return {
+    cityFullName,
+    currentDate,
+    currentTime
+  };
+};
+
+export const updateHistory = cityFullName => ({
   type: 'UPDATE_HISTORY',
-  payload: {
-    history: [{ cityFullName, dateStamp, timeStamp }]
-  }
+  payload: getDateTime(cityFullName)
 });
